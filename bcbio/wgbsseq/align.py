@@ -10,6 +10,7 @@ from bcbio.provenance import do
 from bcbio.distributed.transaction import file_transaction, tx_tmpdir
 from bcbio import broad
 from bcbio.bam import index
+from bcbio import bam
 
 from ichwrapper import log
 
@@ -54,12 +55,9 @@ def _align(in_fastq, sample, workdir, genome_index, is_directional, bowtie2, ref
                 shutil.move(tx_dir, out_dir)
 
         broad_runner = broad.runner_from_config(config)
-        # out_bam, _ = broad_runner.run_fn("picard_formatconverter", out_sam)
         names = {'rg': in_fastq, 'library': 'BS_LIB', 'pl': 'Illumina', 'pu': 'R1', 'sm': in_fastq, 'sample': sample}
         out_fix_bam = broad_runner.run_fn("picard_fix_rgs", out_bam, names)
         order_bam = splitext_plus(out_fix_bam)[0] + "_order.bam"
-        broad_runner.run_fn("picard_reorder", out_fix_bam, reference, order_bam)
-        index(order_bam, config)
         if bowtie2:
             order_bam = _set_quality(order_bam)
         index(order_bam, config)
