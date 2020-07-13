@@ -106,11 +106,8 @@ def clean_file(in_file, data, prefix="", bedprep_dir=None, simple=None):
                 bcbio_py = sys.executable
                 cat_cmd = "zcat" if in_file.endswith(".gz") else "cat"
                 sort_cmd = get_sort_cmd(os.path.dirname(tx_out_file))
-                cmd = ("{cat_cmd} {in_file} | grep -v ^track | grep -v ^browser | grep -v ^@ | "
-                       "grep -v ^# | {simple} "
-                       "{bcbio_py} -c 'from bcbio.variation import bedutils; bedutils.remove_bad()' | "
-                       "{sort_cmd} -k1,1 -k2,2n > {tx_out_file}")
-                do.run(cmd.format(**locals()), "Prepare cleaned BED file", data)
+                cmd = ("{cat_cmd} {in_file} > {tx_out_file}") # removed all extra cleaning and merging lines
+                do.run(cmd.format(**locals()), "Bed file loaded", data)
         vcfutils.bgzip_and_index(out_file, data.get("config", {}), remove_orig=False)
         return out_file
 
