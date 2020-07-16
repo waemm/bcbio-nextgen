@@ -570,8 +570,8 @@ def _add_variantcalls_to_output(out, data, items, is_somatic=False):
                 do.run(cmd, "CNVkit export %s" % outformat)
     out["call_file"] = call_file
     out["vrn_bed"] = annotate.add_genes(calls["bed"], data)
-    effects_vcf, _ = effects.add_to_vcf(calls["vcf"], data, "snpeff")
-    out["vrn_file"] = effects_vcf or calls["vcf"]
+    #effects_vcf, _ = effects.add_to_vcf(calls["vcf"], data, "snpeff")
+    out["vrn_file"] = calls["vcf"]
     out["vrn_file"] = shared.annotate_with_depth(out["vrn_file"], items)
     return out
 

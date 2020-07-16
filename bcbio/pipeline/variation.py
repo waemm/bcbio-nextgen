@@ -94,11 +94,11 @@ def postprocess_variants(items):
     data = _symlink_to_workdir(data, ["config", "algorithm", "variant_regions"])
     if data.get(vrn_key):
         logger.info("Calculating variation effects for %s" % cur_name)
-        ann_vrn_file, vrn_stats = effects.add_to_vcf(data[vrn_key], data)
-        if ann_vrn_file:
-            data[vrn_key] = ann_vrn_file
-        if vrn_stats:
-            data["vrn_stats"] = vrn_stats
+        #ann_vrn_file, vrn_stats = effects.add_to_vcf(data[vrn_key], data)
+        #if ann_vrn_file:
+        #    data[vrn_key] = ann_vrn_file
+        #if vrn_stats:
+        #    data["vrn_stats"] = vrn_stats
         orig_items = _get_orig_items(items)
         logger.info("Annotate VCF file: %s" % cur_name)
         data[vrn_key] = annotation.finalize_vcf(data[vrn_key], get_variantcaller(data, require_bam=False),

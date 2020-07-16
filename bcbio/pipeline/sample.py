@@ -215,10 +215,10 @@ def clean_inputs(data):
     """
     if not utils.get_in(data, ("config", "algorithm", "variant_regions_orig")):
         data["config"]["algorithm"]["variant_regions_orig"] = dd.get_variant_regions(data)
-    clean_vr = clean_file(dd.get_variant_regions(data), data, prefix="cleaned-")
-    merged_vr = merge_overlaps(clean_vr, data)
-    data["config"]["algorithm"]["variant_regions"] = clean_vr
-    data["config"]["algorithm"]["variant_regions_merged"] = merged_vr
+    #clean_vr = clean_file(dd.get_variant_regions(data), data, prefix="cleaned-")
+    #merged_vr = merge_overlaps(clean_vr, data)
+    data["config"]["algorithm"]["variant_regions"] = dd.get_variant_regions(data)
+    data["config"]["algorithm"]["variant_regions_merged"] = dd.get_variant_regions(data)
 
     if dd.get_coverage(data):
         if not utils.get_in(data, ("config", "algorithm", "coverage_orig")):

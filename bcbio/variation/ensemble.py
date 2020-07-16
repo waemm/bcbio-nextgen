@@ -88,9 +88,9 @@ def combine_calls(*args):
                                      dd.get_ref_file(edata), edata)
             callinfo["vrn_file"] = vcfutils.bgzip_and_index(callinfo["vrn_file"], data["config"])
         # After decomposing multiallelic variants and normalizing, re-evaluate effects
-        ann_ma_file, _ = effects.add_to_vcf(callinfo["vrn_file"], data)
-        if ann_ma_file:
-            callinfo["vrn_file"] = ann_ma_file
+        #ann_ma_file, _ = effects.add_to_vcf(callinfo["vrn_file"], data)
+        #if ann_ma_file:
+        #    callinfo["vrn_file"] = ann_ma_file
 
         edata["config"]["algorithm"]["variantcaller"] = "ensemble"
         edata["vrn_file"] = callinfo["vrn_file"]
